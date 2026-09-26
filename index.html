@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,124 +47,60 @@
 <iframe id="site" hidden></iframe>
 
 <script>
-
 const SERVERS = [
-    "https://fedora.tail05913c.ts.net/"
+    "https://fedora.tail05913c.ts.net/",
+    //"https://your-second-server.example.com/"
 ];
 
-
-// GitHub Pages route
-//
-// /       -> user
-// /admin  -> admin
-
-const isAdmin =
-    window.location.pathname === "/admin";
-
-
-// Build the actual server URL
-
-const server =
-    SERVERS[0] +
-    (isAdmin ? "admin" : "");
-
-
 async function tryServer(url) {
-
     try {
-
-        const response =
-            await fetch(url, {
-                method: "GET",
-                cache: "no-store"
-            });
-
+        const response = await fetch(url, {
+            method: "GET",
+            cache: "no-store"
+        });
 
         if (!response.ok) {
-            throw new Error(
-                "Server returned " +
-                response.status
-            );
+            throw new Error("Server returned " + response.status);
         }
 
-
         return true;
-
-    }
-
-    catch {
-
+    } catch {
         return false;
     }
 }
 
-
 async function findServer() {
-
-    document.getElementById(
-        "loading"
-    ).textContent =
+    document.getElementById("loading").textContent =
         "Finding available server...";
 
+    for (const server of SERVERS) {
+        if (await tryServer(server)) {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("offline").style.display = "none";
 
-    if (await tryServer(server)) {
+            const iframe = document.getElementById("site");
+            iframe.src = server;
+            iframe.hidden = false;
 
-        document.getElementById(
-            "loading"
-        ).style.display = "none";
-
-
-        document.getElementById(
-            "offline"
-        ).style.display = "none";
-
-
-        const iframe =
-            document.getElementById("site");
-
-
-        iframe.src = server;
-
-        iframe.hidden = false;
-
-
-        return true;
+            return true;
+        }
     }
 
-
-    document.getElementById(
-        "loading"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "offline"
-    ).style.display = "flex";
-
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("offline").style.display = "flex";
 
     return false;
 }
 
-
 async function checkUntilOnline() {
-
-    const online =
-        await findServer();
-
+    const online = await findServer();
 
     if (!online) {
-
-        setTimeout(
-            checkUntilOnline,
-            10000
-        );
+        setTimeout(checkUntilOnline, 10000);
     }
 }
 
-
 checkUntilOnline();
-
 </script>
-
 </body>
 </html>
