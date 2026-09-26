@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #080808;
+            color: white;
+            font-family: monospace;
+        }
+
+        #loading,
+        #offline {
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #site {
+            width: 100%;
+            height: 100vh;
+            border: 0;
+        }
+
+        #offline {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="loading">
+    Connecting to server...
+</div>
+
+<div id="offline">
+    <h1>Server is down</h1>
+</div>
+
+<iframe id="site" hidden></iframe>
+
+<script>
+
+const server =
+    "https://fedora.tail05913c.ts.net/admin";
+
+
+async function checkServer() {
+
+    try {
+
+        const response =
+            await fetch(server, {
+                cache: "no-store"
+            });
+
+        if (!response.ok)
+            throw new Error();
+
+        document.getElementById(
+            "loading"
+        ).style.display = "none";
+
+        const iframe =
+            document.getElementById("site");
+
+        iframe.src = server;
+        iframe.hidden = false;
+
+    }
+
+    catch {
+
+        document.getElementById(
+            "loading"
+        ).style.display = "none";
+
+        document.getElementById(
+            "offline"
+        ).style.display = "flex";
+
+    }
+}
+
+
+checkServer();
+
+</script>
+
+</body>
+</html>
