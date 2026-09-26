@@ -76,20 +76,31 @@ async function findServer() {
     for (const server of SERVERS) {
         if (await tryServer(server)) {
             document.getElementById("loading").style.display = "none";
+            document.getElementById("offline").style.display = "none";
 
             const iframe = document.getElementById("site");
             iframe.src = server;
             iframe.hidden = false;
 
-            return;
+            return true;
         }
     }
 
     document.getElementById("loading").style.display = "none";
     document.getElementById("offline").style.display = "flex";
+
+    return false;
 }
 
-findServer();
+async function checkUntilOnline() {
+    const online = await findServer();
+
+    if (!online) {
+        setTimeout(checkUntilOnline, 10000);
+    }
+}
+
+checkUntilOnline();
 </script>
 </body>
 </html>
