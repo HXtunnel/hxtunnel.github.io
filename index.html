@@ -47,11 +47,14 @@
 <iframe id="site" hidden></iframe>
 
 <script>
-const SERVER = "https://fedora.tail05913c.ts.net/";
+const SERVERS = [
+    "https://fedora.tail05913c.ts.net/",
+    //"https://your-second-server.example.com/"
+];
 
-async function checkServer() {
+async function tryServer(url) {
     try {
-        const response = await fetch(SERVER, {
+        const response = await fetch(url, {
             method: "GET",
             cache: "no-store"
         });
@@ -60,22 +63,33 @@ async function checkServer() {
             throw new Error("Server returned " + response.status);
         }
 
-        document.getElementById("loading").style.display = "none";
-
-        const iframe = document.getElementById("site");
-        iframe.src = SERVER;
-        iframe.hidden = false;
-
-    } catch (error) {
-        console.log(error);
-
-        document.getElementById("loading").style.display = "none";
-        document.getElementById("offline").style.display = "flex";
+        return true;
+    } catch {
+        return false;
     }
 }
 
-checkServer();
-</script>
+async function findServer() {
+    document.getElementById("loading").textContent =
+        "Finding available server...";
 
+    for (const server of SERVERS) {
+        if (await tryServer(server)) {
+            document.getElementById("loading").style.display = "none";
+
+            const iframe = document.getElementById("site");
+            iframe.src = server;
+            iframe.hidden = false;
+
+            return;
+        }
+    }
+
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("offline").style.display = "flex";
+}
+
+findServer();
+</script>
 </body>
 </html>
