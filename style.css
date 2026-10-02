@@ -5,14 +5,14 @@ body {
             rgb(63, 2, 150),
             rgb(131, 1, 225)
     );
-            color: white;
+            color: rgb(0, 0, 0);
         }
 
         #loading,
         #offline {
             font-family: Arial, Helvetica, sans-serif;
             color: transparent;
-            background: linear-gradient(90deg, #495cff, #9B5CFF, #E05CFF);
+            background: linear-gradient(90deg, #0922ff, #5f00f8, #cb00f8);
             -webkit-background-clip: text;
             background-clip: text;
             text-shadow:
