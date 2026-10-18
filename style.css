@@ -11,6 +11,7 @@ body {
         #loading,
         #offline {
             font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
             color: transparent;
             background: black;
             -webkit-background-clip: text;
