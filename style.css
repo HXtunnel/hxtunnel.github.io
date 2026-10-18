@@ -12,7 +12,7 @@ body {
         #offline {
             font-family: Arial, Helvetica, sans-serif;
             color: transparent;
-            background: linear-gradient(90deg, #0922ff, #5f00f8, #cb00f8);
+            background: black;
             -webkit-background-clip: text;
             background-clip: text;
             text-shadow:
