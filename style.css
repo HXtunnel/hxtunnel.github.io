@@ -15,10 +15,6 @@ body {
             background: black;
             -webkit-background-clip: text;
             background-clip: text;
-            text-shadow:
-            0 0 20px rgba(41, 0, 107, 0.8),
-            0 0 40px rgba(41, 0, 107, 0.6),
-            0 0 80px rgba(41, 0, 107, 0.4);
             display: flex;
             height: 100vh;
             align-items: center;
