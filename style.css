@@ -2,7 +2,7 @@
             margin: 0;
             padding: 0;
             /* Chrome, Edge, Safari, Firefox */
-            scrollbar-width: none;
+            scrollbar-width: 0px;
              background: linear-gradient(
             rgb(1, 16, 79),
             rgb(63, 2, 150),

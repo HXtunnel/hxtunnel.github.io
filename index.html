@@ -54,6 +54,7 @@ async function findServer() {
         if (await tryServer(server)) {
             document.getElementById("loading").style.display = "none";
             document.getElementById("offline").style.display = "none";
+            document.querySelector("body").style.backgroundColor = "black";
 
             const iframe = document.getElementById("site");
             iframe.src = server;
