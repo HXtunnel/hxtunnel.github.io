@@ -1,11 +1,18 @@
-body {
+        body {
             margin: 0;
+            padding: 0;
+            /* Chrome, Edge, Safari, Firefox */
+            scrollbar-width: none;
              background: linear-gradient(
             rgb(1, 16, 79),
             rgb(63, 2, 150),
             rgb(131, 1, 225)
-    );
+            );
             color: rgb(0, 0, 0);
+            
+        }
+        body::-webkit-scrollbar {
+            display: none;
         }
 
         #loading,
