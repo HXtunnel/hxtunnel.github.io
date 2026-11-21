@@ -52,7 +52,6 @@ async function findServer() {
 
     for (const server of SERVERS) {
         if (await tryServer(server)) {
-            document.body.style.backgroundColor = "#000000";
             document.getElementById("loading").style.display = "none";
             document.getElementById("offline").style.display = "none";
             
