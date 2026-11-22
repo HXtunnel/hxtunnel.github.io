@@ -17,7 +17,7 @@
 </div>
 
 <div id="offline">
-    <h1>HX TUNNEL is currently <br> Offline</h1>
+    <h1>Unfortunately HX TUNNEL Is currently <br> Offline</h1>
 </div>
 
 <iframe id="site" hidden></iframe>
@@ -53,7 +53,7 @@ async function findServer() {
         if (await tryServer(server)) {
             document.getElementById("loading").style.display = "none";
             document.getElementById("offline").style.display = "none";
-            
+
 
             const iframe = document.getElementById("site");
             iframe.src = server;
